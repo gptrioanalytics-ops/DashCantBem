@@ -46,7 +46,9 @@ st.markdown(
     """,
     unsafe_allow_html=True)
 
-locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+#locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+def format_brl(valor):
+    return f" {valor:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
 st.set_page_config(page_title="Dashboard de Cotas Vendidas", layout="wide")
 
@@ -110,7 +112,8 @@ def criar_card(col, idx):
     percentual = (valor_total / meta_total * 100) if meta_total > 0 else 0
     percentual = max(0, min(percentual, 100))
     cor_barra = cores_categorias.get(categoria.lower(), "#c0dca1")
-    valor_formatado = locale.format_string('%.2f', valor_total, grouping=True)
+    #valor_formatado = locale.format_string('%.2f', valor_total, grouping=True)
+    valor_formatado = format_brl(valor_total)
 
 
     col.markdown(f"""
