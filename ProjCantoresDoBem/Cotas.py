@@ -57,6 +57,7 @@ st.set_page_config(page_title="Dashboard de Cotas Vendidas", layout="wide")
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive",
          "https://www.googleapis.com/auth/spreadsheets","https://www.googleapis.com/auth/drive.file"]
 creds_dict = json.loads(st.secrets["creds_json"])
+creds_dict["private_key"] = creds_dict["private_key"].replace("\\n", "\n")
 creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
 
 client = gspread.authorize(creds)
