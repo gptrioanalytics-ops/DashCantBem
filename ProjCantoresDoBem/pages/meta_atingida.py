@@ -4,6 +4,7 @@ import gspread
 import base64
 from pathlib import Path
 from oauth2client.service_account import ServiceAccountCredentials
+import json
 
 st.set_page_config(
     page_title="Meta Atingida",
@@ -65,10 +66,12 @@ scope = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
 ]
-creds = ServiceAccountCredentials.from_json_keyfile_name(
-    "coral-sanctuary-476617-m6-70561c48c9f5.json", scope
-)
+creds_dict = json.loads(st.secrets["creds_json"])
+creds_dict["private_key"] = creds_dict["private_key"].replace("\\n", "\n")
+creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+
 client = gspread.authorize(creds)
+
 sheet = client.open("DashCantBem").sheet1
 data = sheet.get_all_records()
 
