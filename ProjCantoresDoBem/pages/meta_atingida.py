@@ -11,8 +11,8 @@ st.set_page_config(
 )
 
 st.set_page_config(page_title="Meta Atingida!", layout="centered")
-
-img_path = Path("Aquarela.jpg")
+from pathlib import Path
+img_path = Path(__file__).parent / "Aquarela.jpg"
 def get_base64_of_image(image_file):
         with open(image_file, "rb") as f:
             data = f.read()
