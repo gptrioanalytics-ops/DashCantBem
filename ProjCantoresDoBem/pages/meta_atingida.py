@@ -28,7 +28,7 @@ st.markdown(
             background-image: url("data:image/png;base64,{img_base64}");
             background-repeat: no-repeat;
             background-attachment: fixed;
-            background-position: right bottom;
+            background-position: right 750px;
             background-size: 400px ;
             height:90vh
             overflow: hidden;
@@ -41,20 +41,29 @@ st.markdown(
 categoria = st.session_state.get("categoria_meta", "Cota Desconhecida")
 
 st.markdown(f"""
-            <div style="text-align: center; font-size:120px; color: green; font-weight:;">
-            🎉 META ATINGIDA! 🎉
+            <div style="text-align: center; font-size:70px; color: green; font-weight:;">
+            🎉 META 🎉
+            </div>
+            <div style="text-align: center; font-size:70px; color: green; font-weight:;">
+            🎉 ATINGIDA! 🎉
             </div>
             """,unsafe_allow_html=True)
 st.markdown(f"""
-            <div style="text-align: center; font-size:24px; color: black;"> 
-            Parabéns! A categoria {categoria.upper()} atingiu a meta! 🎯
+            <div style="text-align: center; font-size:50px; color: black;"> 
+            Parabéns! 
+            </div>
+            <div style="text-align: center; font-size:50px; color: black;">
+            A categoria <span>{categoria.upper()}</span> atingiu a meta! 🎯
+            </div>
+            <div style="text-align: center; font-size:30px; color: black;">
+            As crianças agradecem seu apoio! ❤️
             </div>
             """, unsafe_allow_html=True)
 
 # --- Mostra os balões
 with st.container():
     st.balloons()
-    st.markdown("### Verificando status da meta...")
+    #st.markdown("### Verificando status da meta...")
 
 # --- Pausa um pouco (pra dar tempo de mostrar)
 time.sleep(3)
@@ -99,4 +108,3 @@ if mostrar_col in colunas:
                 st.session_state["categoria_meta"] = None
                 st.switch_page("Cotas.py")
             break
-

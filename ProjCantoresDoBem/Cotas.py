@@ -38,7 +38,7 @@ st.markdown(
             background-image: url("data:image/png;base64,{img_base64}");
             background-repeat: no-repeat;
             background-attachment: fixed;
-            background-position: right bottom;
+            background-position: right 750px;
             background-size: 400px ;
             height:90vh
             overflow: hidden;
@@ -107,8 +107,8 @@ col1, col2, col3, col4, col5 = st.columns(5)
 # --- Função auxiliar para criar card
 def criar_card(col, idx):
     categoria = df.iloc[idx]["categoria"]
-    cotas_vendidas = df.iloc[idx]["cotas vendidas"]
-    cotas_totais = df.iloc[idx]["cotas totais"]
+    cotas_vendidas = int(df.iloc[idx]["cotas vendidas"])
+    cotas_totais = int(df.iloc[idx]["cotas totais"])
     valor_unitario = df.iloc[idx]["valor unitario"]
 
     valor_total = cotas_vendidas * valor_unitario
