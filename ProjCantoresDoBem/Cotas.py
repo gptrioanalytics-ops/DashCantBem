@@ -6,6 +6,7 @@ import locale
 import base64
 from pathlib import Path
 from streamlit_autorefresh import st_autorefresh
+import json
 
 if "meta_exibida" not in st.session_state:
     st.session_state.meta_exibida = False
@@ -55,7 +56,9 @@ st.set_page_config(page_title="Dashboard de Cotas Vendidas", layout="wide")
 # --- Conexão com Google Sheets
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive",
          "https://www.googleapis.com/auth/spreadsheets","https://www.googleapis.com/auth/drive.file"]
-creds = ServiceAccountCredentials.from_json_keyfile_name("coral-sanctuary-476617-m6-70561c48c9f5.json", scope)
+creds_dict = json.loads(st.secrets["google"]["creds_json"])
+creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+
 client = gspread.authorize(creds)
 
 sheet = client.open("DashCantBem").sheet1
